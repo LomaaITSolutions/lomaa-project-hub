@@ -13,12 +13,12 @@ const Footer = () => {
                 <span className="text-primary-foreground font-bold text-lg">L</span>
               </div>
               <span className="text-xl font-bold text-foreground">
-                Lomaa IT Solutions
+                Lomaa <span className="text-primary">projects</span>
               </span>
             </div>
             <p className="text-muted-foreground mb-4 max-w-md">
               Your trusted partner for B.Tech final year projects. We provide complete project 
-              solutions with full source code, documentation, and guidance across all engineering branches.
+              solutions with full source code, documentation, PPT presentations, and expert training across all engineering branches.
             </p>
             <div className="flex space-x-4">
               <div className="flex items-center text-sm text-muted-foreground">

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, Download, Mail, Filter } from "lucide-react";
+import { Search, Download, Mail, Filter, Image } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -15,6 +15,7 @@ interface Project {
   technologies: string[];
   difficulty: "Beginner" | "Intermediate" | "Advanced";
   description: string;
+  imageDescription: string;
 }
 
 const BranchPage = () => {
@@ -22,157 +23,377 @@ const BranchPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDomain, setSelectedDomain] = useState("All");
 
-  // Mock project data - in real app, this would come from API
+  // Enhanced project data based on your specifications
   const getProjectsForBranch = (branchName: string): Project[] => {
     const baseProjects: Record<string, Project[]> = {
       "cse-it": [
         {
           id: 1,
-          title: "E-commerce Website with AI Recommendations",
-          domain: "Web Development",
-          technologies: ["React", "Node.js", "MongoDB", "Python"],
+          title: "AI-Powered Chatbot for University Enquiries",
+          domain: "AI/ML",
+          technologies: ["Python", "Rasa", "NLP", "Flask"],
           difficulty: "Advanced",
-          description: "Complete e-commerce platform with AI-powered product recommendations"
+          description: "Intelligent chatbot system for handling university inquiries using natural language processing",
+          imageDescription: "Chatbot workflow diagram"
         },
         {
           id: 2,
-          title: "Real-time Chat Application",
+          title: "E-Commerce Website with Recommendation Engine",
           domain: "Web Development",
-          technologies: ["React", "Socket.io", "Express", "MongoDB"],
-          difficulty: "Intermediate",
-          description: "Real-time messaging app with file sharing and group chat features"
+          technologies: ["React", "Node.js", "MongoDB", "ML"],
+          difficulty: "Advanced",
+          description: "Complete e-commerce platform with AI-powered product recommendations using collaborative filtering",
+          imageDescription: "Product recommendation flow"
         },
         {
           id: 3,
-          title: "Fraud Detection using Machine Learning",
-          domain: "AI/ML",
-          technologies: ["Python", "Scikit-learn", "Pandas", "Flask"],
+          title: "Blockchain-based Voting System",
+          domain: "Blockchain",
+          technologies: ["Ethereum", "Solidity", "Web3.js"],
           difficulty: "Advanced",
-          description: "ML model to detect fraudulent transactions in financial data"
+          description: "Secure digital voting system using blockchain technology for transparent elections",
+          imageDescription: "Blockchain transaction diagram"
         },
         {
           id: 4,
-          title: "Student Management System",
+          title: "Online Food Delivery System with Cloud Deployment",
           domain: "Web Development",
-          technologies: ["PHP", "MySQL", "Bootstrap", "JavaScript"],
-          difficulty: "Beginner",
-          description: "Complete student information management system for colleges"
+          technologies: ["Django", "PostgreSQL", "AWS EC2"],
+          difficulty: "Intermediate",
+          description: "Complete food delivery platform with real-time tracking and cloud deployment",
+          imageDescription: "Food order process UI"
         },
         {
           id: 5,
-          title: "Image Recognition using Deep Learning",
-          domain: "AI/ML",
-          technologies: ["Python", "TensorFlow", "Keras", "OpenCV"],
+          title: "Intelligent Fault Detection System using AWS",
+          domain: "Cloud Computing",
+          technologies: ["AWS CloudWatch", "SageMaker", "Python"],
           difficulty: "Advanced",
-          description: "Deep learning model for object detection and classification"
+          description: "Cloud-based AIOps solution to detect anomalies in IT infrastructure logs using ML models",
+          imageDescription: "Log anomaly detection flow"
         },
         {
           id: 6,
+          title: "Face Recognition-based Attendance System",
+          domain: "AI/ML",
+          technologies: ["OpenCV", "Python", "Flask", "MySQL"],
+          difficulty: "Intermediate",
+          description: "Automated attendance tracking system using facial recognition technology",
+          imageDescription: "Face recognition diagram"
+        },
+        {
+          id: 7,
+          title: "IoT Smart Parking System",
+          domain: "IoT",
+          technologies: ["Arduino", "IoT Sensors", "Node-RED", "Firebase"],
+          difficulty: "Intermediate",
+          description: "Smart parking management system with real-time slot detection and mobile app",
+          imageDescription: "Parking slot detection diagram"
+        },
+        {
+          id: 8,
+          title: "College ERP System",
+          domain: "Web Development",
+          technologies: ["PHP", "MySQL", "Bootstrap"],
+          difficulty: "Beginner",
+          description: "Complete enterprise resource planning system for educational institutions",
+          imageDescription: "ERP dashboard screenshot"
+        },
+        {
+          id: 9,
+          title: "Healthcare Appointment Booking System",
+          domain: "Web Development",
+          technologies: ["MERN Stack", "JWT", "MongoDB"],
+          difficulty: "Intermediate",
+          description: "Online healthcare appointment booking and management system",
+          imageDescription: "Appointment booking UI"
+        },
+        {
+          id: 10,
           title: "Cloud-based File Storage System",
           domain: "Cloud Computing",
-          technologies: ["AWS", "React", "Node.js", "S3"],
+          technologies: ["AWS S3", "Node.js", "Express"],
           difficulty: "Intermediate",
-          description: "Secure cloud storage solution with file sharing capabilities"
+          description: "Secure cloud storage solution similar to Google Drive with file sharing capabilities",
+          imageDescription: "File upload/download flow"
         }
       ],
       "ece": [
         {
           id: 1,
-          title: "IoT-based Smart Home Automation",
+          title: "Smart Traffic Light Control using IoT",
           domain: "IoT",
-          technologies: ["Arduino", "Raspberry Pi", "Python", "MQTT"],
+          technologies: ["Raspberry Pi", "Sensors", "MQTT"],
           difficulty: "Intermediate",
-          description: "Complete home automation system with mobile app control"
+          description: "Intelligent traffic management system using IoT sensors and adaptive timing",
+          imageDescription: "Traffic signal circuit"
         },
         {
           id: 2,
-          title: "Wireless Sensor Network for Environmental Monitoring",
-          domain: "Embedded Systems",
-          technologies: ["Arduino", "XBee", "C++", "Python"],
-          difficulty: "Advanced",
-          description: "WSN system for monitoring temperature, humidity, and air quality"
+          title: "IoT-based Home Automation System",
+          domain: "IoT",
+          technologies: ["ESP32", "Blynk App"],
+          difficulty: "Intermediate",
+          description: "Complete smart home automation with mobile app control and voice commands",
+          imageDescription: "Smart home control diagram"
         },
         {
           id: 3,
-          title: "RFID-based Attendance System",
-          domain: "Embedded Systems",
-          technologies: ["Arduino", "RFID", "LCD", "C++"],
-          difficulty: "Beginner",
-          description: "Automated attendance tracking system using RFID technology"
+          title: "Voice-controlled Wheelchair",
+          domain: "Robotics",
+          technologies: ["Arduino", "Bluetooth", "Speech Recognition"],
+          difficulty: "Advanced",
+          description: "Voice-activated wheelchair system for mobility assistance",
+          imageDescription: "Wheelchair prototype sketch"
         },
         {
           id: 4,
-          title: "Digital Signal Processing for Audio Enhancement",
-          domain: "Signal Processing",
-          technologies: ["MATLAB", "C++", "DSP Kit"],
-          difficulty: "Advanced",
-          description: "Real-time audio processing for noise reduction and enhancement"
+          title: "Smart Agriculture Monitoring System",
+          domain: "IoT",
+          technologies: ["IoT Sensors", "LoRa", "Cloud DB"],
+          difficulty: "Intermediate",
+          description: "IoT-based crop monitoring with soil moisture, temperature, and humidity sensors",
+          imageDescription: "Farm IoT sensors diagram"
         },
         {
           id: 5,
-          title: "Bluetooth-controlled Robot",
-          domain: "Robotics",
-          technologies: ["Arduino", "Bluetooth", "Android", "C++"],
+          title: "Gesture Recognition for Appliances Control",
+          domain: "Embedded Systems",
+          technologies: ["Accelerometer", "Arduino"],
           difficulty: "Intermediate",
-          description: "Mobile-controlled robot with obstacle detection"
+          description: "Hand gesture-based control system for home appliances",
+          imageDescription: "Gesture to device control flow"
         },
         {
           id: 6,
-          title: "VLSI Design of ALU using Verilog",
-          domain: "VLSI",
-          technologies: ["Verilog", "Xilinx", "FPGA"],
+          title: "Solar-powered Mobile Charger",
+          domain: "Renewable Energy",
+          technologies: ["Solar Panel", "Battery", "DC-DC Converter"],
+          difficulty: "Beginner",
+          description: "Portable solar charging device for mobile phones and small electronics",
+          imageDescription: "Charger circuit schematic"
+        },
+        {
+          id: 7,
+          title: "Smart Helmet with Accident Detection",
+          domain: "Safety Systems",
+          technologies: ["Accelerometer", "GSM", "GPS"],
+          difficulty: "Intermediate",
+          description: "Smart helmet with accident detection and automatic emergency alert system",
+          imageDescription: "Helmet IoT module diagram"
+        },
+        {
+          id: 8,
+          title: "Biomedical Signal Monitoring (ECG/EEG)",
+          domain: "Biomedical",
+          technologies: ["Biomedical Sensors", "MATLAB"],
           difficulty: "Advanced",
-          description: "Complete ALU design and implementation on FPGA"
+          description: "Real-time monitoring and analysis of biomedical signals",
+          imageDescription: "Signal waveform chart"
+        },
+        {
+          id: 9,
+          title: "Drone for Surveillance",
+          domain: "Robotics",
+          technologies: ["Drone Kit", "Camera", "Arduino"],
+          difficulty: "Advanced",
+          description: "Autonomous surveillance drone with live video streaming capabilities",
+          imageDescription: "Drone control schematic"
+        },
+        {
+          id: 10,
+          title: "RFID-based Attendance System",
+          domain: "Embedded Systems",
+          technologies: ["RFID Reader", "Arduino", "LCD"],
+          difficulty: "Beginner",
+          description: "Automated attendance tracking using RFID technology",
+          imageDescription: "RFID workflow diagram"
         }
       ],
       "mechanical": [
         {
           id: 1,
-          title: "3D Printing of Automotive Parts",
-          domain: "Manufacturing",
-          technologies: ["CAD", "3D Printing", "Materials Science"],
+          title: "Design of Solar-powered Water Pump",
+          domain: "Renewable Energy",
+          technologies: ["Solar Panel", "Pump Design", "CAD"],
           difficulty: "Intermediate",
-          description: "Design and 3D printing of custom automotive components"
+          description: "Efficient solar-powered water pumping system for irrigation applications",
+          imageDescription: "Solar pump system diagram"
         },
         {
           id: 2,
-          title: "Solar Water Heater Design and Analysis",
-          domain: "Thermal Engineering",
-          technologies: ["SolidWorks", "ANSYS", "CFD"],
+          title: "Automatic Pneumatic Braking System",
+          domain: "Automotive",
+          technologies: ["Pneumatics", "Sensors", "Control Systems"],
           difficulty: "Advanced",
-          description: "Complete design and thermal analysis of solar water heating system"
+          description: "Advanced braking system with automatic collision detection and response",
+          imageDescription: "Pneumatic brake circuit"
         },
         {
           id: 3,
-          title: "Automated Cutting Machine",
+          title: "Smart Irrigation Robot",
           domain: "Automation",
-          technologies: ["PLC", "Pneumatics", "CAD"],
+          technologies: ["Arduino", "Sensors", "Mobile Robot"],
           difficulty: "Intermediate",
-          description: "CNC-based automated cutting system for industrial applications"
+          description: "Autonomous robot for precision irrigation in agricultural fields",
+          imageDescription: "Irrigation robot design"
         },
         {
           id: 4,
-          title: "Wind Turbine Blade Design Optimization",
-          domain: "Renewable Energy",
-          technologies: ["ANSYS", "CFD", "SolidWorks"],
+          title: "Fabrication of Mini CNC Machine",
+          domain: "Manufacturing",
+          technologies: ["CNC", "Stepper Motors", "G-Code"],
           difficulty: "Advanced",
-          description: "Aerodynamic optimization of wind turbine blades for maximum efficiency"
+          description: "Small-scale CNC machine for precision machining operations",
+          imageDescription: "CNC machine assembly"
         },
         {
           id: 5,
-          title: "Hydraulic Jack Design and Testing",
-          domain: "Mechanical Design",
-          technologies: ["SolidWorks", "FEA", "Testing"],
-          difficulty: "Beginner",
-          description: "Complete design and stress analysis of hydraulic lifting system"
+          title: "Hybrid Bicycle (Manual + Electric)",
+          domain: "Automotive",
+          technologies: ["Electric Motor", "Battery", "Control System"],
+          difficulty: "Intermediate",
+          description: "Hybrid bicycle with manual and electric assistance modes",
+          imageDescription: "Hybrid bike schematic"
         },
         {
           id: 6,
-          title: "Heat Exchanger Performance Analysis",
-          domain: "Thermal Engineering",
-          technologies: ["MATLAB", "Heat Transfer", "CFD"],
+          title: "Automatic Gear Shifting System",
+          domain: "Automotive",
+          technologies: ["Sensors", "Actuators", "Control Logic"],
+          difficulty: "Advanced",
+          description: "Automatic transmission system with intelligent gear shifting",
+          imageDescription: "Gear shifting mechanism"
+        },
+        {
+          id: 7,
+          title: "Wind-powered Water Heater",
+          domain: "Renewable Energy",
+          technologies: ["Wind Turbine", "Heat Exchanger", "Controls"],
           difficulty: "Intermediate",
-          description: "Thermal performance analysis and optimization of shell-tube heat exchanger"
+          description: "Wind energy-based water heating system for residential use",
+          imageDescription: "Wind heater system layout"
+        },
+        {
+          id: 8,
+          title: "3D Printed Drone Frame",
+          domain: "Manufacturing",
+          technologies: ["3D Printing", "CAD", "Composite Materials"],
+          difficulty: "Intermediate",
+          description: "Lightweight drone frame design using 3D printing technology",
+          imageDescription: "3D printed drone frame"
+        },
+        {
+          id: 9,
+          title: "Automated Material Handling System",
+          domain: "Automation",
+          technologies: ["Conveyor", "PLC", "Sensors"],
+          difficulty: "Advanced",
+          description: "Automated system for material transportation in manufacturing",
+          imageDescription: "Material handling layout"
+        },
+        {
+          id: 10,
+          title: "Smart Dustbin with Hydraulic System",
+          domain: "Automation",
+          technologies: ["Hydraulics", "Sensors", "Arduino"],
+          difficulty: "Beginner",
+          description: "Automatic waste collection system with hydraulic compression",
+          imageDescription: "Smart dustbin mechanism"
+        }
+      ],
+      "eee": [
+        {
+          id: 1,
+          title: "Solar-powered Smart Inverter System",
+          domain: "Power Electronics",
+          technologies: ["Solar Panels", "MPPT", "Grid-Tie Inverter"],
+          difficulty: "Advanced",
+          description: "Smart grid-connected solar inverter with maximum power point tracking",
+          imageDescription: "Smart inverter circuit diagram"
+        },
+        {
+          id: 2,
+          title: "IoT-based Energy Monitoring System",
+          domain: "Smart Grid",
+          technologies: ["IoT", "Energy Meters", "Cloud Analytics"],
+          difficulty: "Intermediate",
+          description: "Real-time energy consumption monitoring and analytics system",
+          imageDescription: "Energy monitoring dashboard"
+        },
+        {
+          id: 3,
+          title: "Wireless Power Transfer for EVs",
+          domain: "Electric Vehicles",
+          technologies: ["Wireless Charging", "Inductive Coupling", "Power Electronics"],
+          difficulty: "Advanced",
+          description: "Wireless charging system for electric vehicles using inductive coupling",
+          imageDescription: "Wireless charging setup"
+        },
+        {
+          id: 4,
+          title: "Smart Grid Fault Detection",
+          domain: "Power Systems",
+          technologies: ["Fault Detection", "Smart Sensors", "Communication"],
+          difficulty: "Advanced",
+          description: "Intelligent fault detection and isolation system for smart grids",
+          imageDescription: "Grid fault detection diagram"
+        },
+        {
+          id: 5,
+          title: "Wind-Solar Hybrid Power Plant",
+          domain: "Renewable Energy",
+          technologies: ["Wind Turbine", "Solar Panels", "Hybrid Controller"],
+          difficulty: "Advanced",
+          description: "Combined wind and solar power generation system with energy storage",
+          imageDescription: "Hybrid power plant layout"
+        }
+      ],
+      "civil": [
+        {
+          id: 1,
+          title: "Smart Traffic Management using IoT Sensors",
+          domain: "Smart City",
+          technologies: ["IoT Sensors", "Traffic Analytics", "Signal Control"],
+          difficulty: "Intermediate",
+          description: "Intelligent traffic management system using IoT sensors and data analytics",
+          imageDescription: "Smart traffic system layout"
+        },
+        {
+          id: 2,
+          title: "Green Building Design using BIM",
+          domain: "Construction Technology",
+          technologies: ["BIM", "Sustainable Design", "Energy Analysis"],
+          difficulty: "Advanced",
+          description: "Sustainable building design using Building Information Modeling",
+          imageDescription: "BIM green building model"
+        },
+        {
+          id: 3,
+          title: "Smart Drainage System with IoT Monitoring",
+          domain: "Water Management",
+          technologies: ["IoT", "Water Level Sensors", "Pump Control"],
+          difficulty: "Intermediate",
+          description: "Automated drainage system with real-time monitoring and control",
+          imageDescription: "Smart drainage network"
+        },
+        {
+          id: 4,
+          title: "Earthquake-resistant Building Model",
+          domain: "Structural Engineering",
+          technologies: ["Seismic Design", "Structural Analysis", "Safety Systems"],
+          difficulty: "Advanced",
+          description: "Earthquake-resistant building design with advanced damping systems",
+          imageDescription: "Seismic building model"
+        },
+        {
+          id: 5,
+          title: "Water Quality Monitoring System",
+          domain: "Environmental Engineering",
+          technologies: ["Water Sensors", "IoT", "Data Analytics"],
+          difficulty: "Intermediate",
+          description: "Real-time water quality monitoring system for public water supplies",
+          imageDescription: "Water monitoring setup"
         }
       ]
     };
@@ -185,17 +406,27 @@ const BranchPage = () => {
       "cse-it": {
         title: "Computer Science & IT Projects",
         description: "Explore cutting-edge projects in web development, AI/ML, cloud computing, and more",
-        domains: ["Web Development", "AI/ML", "Cloud Computing", "Mobile Apps", "Data Science"]
+        domains: ["Web Development", "AI/ML", "Cloud Computing", "IoT", "Blockchain", "Mobile Apps"]
       },
       "ece": {
         title: "Electronics & Communication Projects",
-        description: "Innovative projects in IoT, embedded systems, VLSI, signal processing, and robotics",
-        domains: ["IoT", "Embedded Systems", "VLSI", "Signal Processing", "Robotics", "Telecommunications"]
+        description: "Innovative projects in IoT, embedded systems, robotics, and communication technologies",
+        domains: ["IoT", "Embedded Systems", "Robotics", "Safety Systems", "Biomedical", "Renewable Energy"]
       },
       "mechanical": {
         title: "Mechanical Engineering Projects",
-        description: "Advanced projects in manufacturing, thermal systems, automation, and design",
-        domains: ["Manufacturing", "Thermal Engineering", "Automation", "Renewable Energy", "Mechanical Design", "CAD/CAM"]
+        description: "Advanced projects in manufacturing, automation, renewable energy, and automotive systems",
+        domains: ["Manufacturing", "Automation", "Renewable Energy", "Automotive", "Thermal Engineering"]
+      },
+      "eee": {
+        title: "Electrical & Electronics Projects",
+        description: "Power systems, renewable energy, smart grid, and electric vehicle projects",
+        domains: ["Power Electronics", "Smart Grid", "Electric Vehicles", "Power Systems", "Renewable Energy"]
+      },
+      "civil": {
+        title: "Civil Engineering Projects",
+        description: "Smart city, construction technology, water management, and structural engineering projects",
+        domains: ["Smart City", "Construction Technology", "Water Management", "Structural Engineering", "Environmental Engineering"]
       }
     };
     
@@ -214,10 +445,10 @@ const BranchPage = () => {
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case "Beginner": return "bg-green-100 text-green-800";
-      case "Intermediate": return "bg-yellow-100 text-yellow-800";
-      case "Advanced": return "bg-red-100 text-red-800";
-      default: return "bg-gray-100 text-gray-800";
+      case "Beginner": return "bg-green-100 text-green-800 border-green-200";
+      case "Intermediate": return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      case "Advanced": return "bg-red-100 text-red-800 border-red-200";
+      default: return "bg-gray-100 text-gray-800 border-gray-200";
     }
   };
 
@@ -237,7 +468,7 @@ const BranchPage = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="secondary" size="lg">
               <Download className="mr-2 h-5 w-5" />
-              Download Complete List
+              Download Complete List (150+ Projects)
             </Button>
             <Button variant="outline" size="lg" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
               <Link to="/contact">
@@ -281,7 +512,7 @@ const BranchPage = () => {
           </div>
           
           <div className="mt-4 text-sm text-muted-foreground">
-            Showing {filteredProjects.length} of {projects.length} projects
+            Showing {filteredProjects.length} of {projects.length} projects (Sample - Total 150+ available)
           </div>
         </div>
       </section>
@@ -291,26 +522,37 @@ const BranchPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project) => (
-              <Card key={project.id} className="hover:shadow-medium transition-all duration-300 hover:-translate-y-1">
-                <CardHeader>
-                  <div className="flex items-start justify-between mb-2">
+              <Card key={project.id} className="hover:shadow-medium transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                <CardHeader className="pb-3">
+                  <div className="flex items-start justify-between mb-3">
                     <Badge variant="secondary" className="text-xs">
                       {project.domain}
                     </Badge>
-                    <Badge className={`text-xs ${getDifficultyColor(project.difficulty)}`}>
+                    <Badge className={`text-xs border ${getDifficultyColor(project.difficulty)}`}>
                       {project.difficulty}
                     </Badge>
                   </div>
-                  <CardTitle className="text-lg line-clamp-2">
+                  
+                  {/* Image placeholder */}
+                  <div className="w-full h-32 bg-gradient-secondary rounded-lg flex items-center justify-center mb-3">
+                    <div className="text-center">
+                      <Image className="h-8 w-8 text-muted-foreground mx-auto mb-1" />
+                      <div className="text-xs text-muted-foreground px-2">
+                        {project.imageDescription}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <CardTitle className="text-lg line-clamp-2 leading-tight">
                     {project.title}
                   </CardTitle>
-                  <CardDescription className="line-clamp-3">
+                  <CardDescription className="line-clamp-3 text-sm">
                     {project.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="pt-0">
                   <div className="mb-4">
-                    <div className="text-sm text-muted-foreground mb-2">Technologies:</div>
+                    <div className="text-sm font-medium text-foreground mb-2">🛠️ Technologies:</div>
                     <div className="flex flex-wrap gap-1">
                       {project.technologies.map((tech, index) => (
                         <Badge key={index} variant="outline" className="text-xs">
@@ -342,6 +584,28 @@ const BranchPage = () => {
               </Button>
             </div>
           )}
+          
+          {/* More Projects CTA */}
+          <div className="mt-12 text-center bg-gradient-secondary rounded-lg p-8">
+            <h3 className="text-2xl font-bold text-foreground mb-4">
+              Need More Projects?
+            </h3>
+            <p className="text-muted-foreground mb-6">
+              This is just a sample. We have 150+ projects available for {branchInfo.title.split(' ')[0]} branch.
+              Contact us to get the complete project list with detailed documentation.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button variant="hero" size="lg" asChild>
+                <Link to="/contact">
+                  Get Complete Project List
+                </Link>
+              </Button>
+              <Button variant="outline" size="lg">
+                <Download className="mr-2 h-5 w-5" />
+                Download PDF Catalog
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -75,10 +75,10 @@ const Home = () => {
   ];
 
   const stats = [
-    { number: "500+", label: "Projects Delivered" },
+    { number: "1000+", label: "Projects Delivered" },
     { number: "2000+", label: "Happy Students" },
     { number: "6", label: "Engineering Branches" },
-    { number: "100%", label: "Success Rate" }
+    { number: "100%", label: "Industry Expert Mentors" }
   ];
 
   return (
@@ -90,12 +90,12 @@ const Home = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-6">
-              Your Final Year Project
-              <span className="block">Solution Partner</span>
+              We provide end-to-end project guidance for B.Tech students
+              <span className="block">across all branches</span>
             </h1>
             <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto">
-              Get complete B.Tech project solutions with source code, documentation, 
-              and expert guidance across all engineering branches.
+              Get complete solutions with source code, documentation, PPT presentations, 
+              and training from industry experts.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="secondary" size="lg" asChild>
@@ -170,16 +170,32 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Why Choose Us Section */}
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Why Choose Lomaa IT Solutions?
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              We provide complete project solutions with everything you need for success
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+              Industry experts, comprehensive solutions, and proven track record across all engineering branches
             </p>
+            
+            {/* Key Benefits Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+              <div className="text-center p-6 bg-gradient-secondary rounded-lg">
+                <div className="text-2xl font-bold text-primary mb-2">Source Code + Report + PPT</div>
+                <div className="text-muted-foreground">Complete project package with all deliverables</div>
+              </div>
+              <div className="text-center p-6 bg-gradient-secondary rounded-lg">
+                <div className="text-2xl font-bold text-primary mb-2">Industry Expert Mentors</div>
+                <div className="text-muted-foreground">Guidance from experienced professionals</div>
+              </div>
+              <div className="text-center p-6 bg-gradient-secondary rounded-lg">
+                <div className="text-2xl font-bold text-primary mb-2">24/7 Support & Training</div>
+                <div className="text-muted-foreground">Round-the-clock assistance and training</div>
+              </div>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

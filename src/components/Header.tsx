@@ -9,9 +9,8 @@ const Header = () => {
 
   const navigation = [
     { name: "Home", href: "/" },
-    { name: "CSE/IT", href: "/cse-it" },
-    { name: "ECE", href: "/ece" },
-    { name: "Mechanical", href: "/mechanical" },
+    { name: "Projects", href: "/cse-it" },
+    { name: "Services", href: "/services" },
     { name: "Contact", href: "/contact" }
   ];
 
@@ -27,7 +26,7 @@ const Header = () => {
               <span className="text-primary-foreground font-bold text-lg">L</span>
             </div>
             <span className="text-xl font-bold text-foreground">
-              Lomaa IT Solutions
+              Lomaa <span className="text-primary">projects</span>
             </span>
           </Link>
 
